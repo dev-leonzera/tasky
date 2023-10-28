@@ -1,8 +1,8 @@
 <template>
-  <aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
-    <div class="py-4 text-gray-500">
-      <Link class="ml-6 text-lg font-bold text-gray-800" :href="route('dashboard')">
-        Windmill
+  <aside class="z-20 hidden w-64 overflow-y-auto bg-blue-600 md:block flex-shrink-0">
+    <div class="py-4 text-slate-50">
+      <Link class="ml-6 text-lg font-bold text-slate-50" :href="route('dashboard')">
+        Tasky
       </Link>
 
       <ul class="mt-6">
@@ -33,6 +33,19 @@
         </li>
 
         <li class="relative px-6 py-3">
+          <NavLink :href="route('clientes.index')" :active="route().current('clientes.index')">
+            <template #icon>
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                   xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+              </svg>
+            </template>
+            Clientes
+          </NavLink>
+        </li>
+
+        <li class="relative px-6 py-3">
           <NavLink :href="route('about')" :active="route().current('about')">
             <template #icon>
               <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round"
@@ -45,7 +58,7 @@
           </NavLink>
         </li>
 
-        <li class="relative px-6 py-3">
+        <!-- <li class="relative px-6 py-3">
           <button @click="showingTwoLevelMenu = !showingTwoLevelMenu"
               class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800"
               aria-haspopup="true">
@@ -68,7 +81,7 @@
                 <a class="w-full" href="#">Child menu</a>
               </li>
             </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
   </aside>
