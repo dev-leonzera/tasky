@@ -7,7 +7,7 @@
     </template>
 
     <div>
-      <Link :href="route('dashboard')">
+      <Link :href="route('clientes.create')">
       <CustomButton>
         Cadastrar Cliente
       </CustomButton>

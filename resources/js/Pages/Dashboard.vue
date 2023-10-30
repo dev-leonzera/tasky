@@ -19,10 +19,10 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Total clients
+            Total de clientes
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            6389
+            {{countClientes}}
           </p>
         </div>
       </div>
@@ -37,15 +37,15 @@
         </div>
         <div>
           <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-            Account balance
+            Total de Projetos
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            $ 46,760.89
+            10
           </p>
         </div>
       </div>
       <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+      <!-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -61,9 +61,9 @@
             376
           </p>
         </div>
-      </div>
+      </div> -->
       <!-- Card -->
-      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+      <!-- <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
           <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
             <path fill-rule="evenodd"
@@ -79,7 +79,7 @@
             35
           </p>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="w-full overflow-hidden rounded-lg shadow-xs">
       <div class="w-full overflow-x-auto">
@@ -197,4 +197,8 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+  countClientes: Number
+});
 </script>

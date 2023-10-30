@@ -15,4 +15,13 @@ class ClienteRepository {
     public function listAllClientes(){
         return $this->clienteModel->all();
     }
+
+    public function getCountAllClientes(){
+        return $this->clienteModel->all()->count();
+    }
+
+    public function createCliente($dados){
+        $cliente = $this->clienteModel->create($dados);
+        return $cliente;
+    }
 }

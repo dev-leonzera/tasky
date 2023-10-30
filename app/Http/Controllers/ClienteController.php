@@ -18,4 +18,21 @@ class ClienteController extends Controller
         $clientes = $this->clienteRepository->listAllClientes();
         return Inertia::render('Clientes/Index', compact('clientes'));
     }
+
+    public function create(){
+        return Inertia::render('Clientes/Create');
+    }
+
+    public function store(Request $request){
+        $dados = [
+            'nome' => $request->nome,
+            'tipo' => $request->tipo,
+            'data_contrato' => now(),
+            'documento' => $request->documento
+        ];
+
+        $cliente = $this->clienteRepository->createCliente($dados);
+
+        return Inertia::render('Clientes/Index');
+    }
 }
