@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->date('data_contrato');
-            $table->string('tipo');
-            $table->string('documento');
+            $table->string('tipo');            
             $table->boolean('ativo')->default(true);
             $table->timestamps();
         });

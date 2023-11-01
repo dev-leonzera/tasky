@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClienteRequest;
+use App\Http\Requests\UpdateClienteRequest;
 use App\Repositories\ClienteRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -23,16 +25,46 @@ class ClienteController extends Controller
         return Inertia::render('Clientes/Create');
     }
 
-    public function store(Request $request){
+    public function store(StoreClienteRequest $request){
+        $input = $request->validated();
+
+        
         $dados = [
-            'nome' => $request->nome,
-            'tipo' => $request->tipo,
-            'data_contrato' => now(),
-            'documento' => $request->documento
+            'nome' => $input['nome'],
+            'tipo' => $input['tipo'],
+            'documento' => "Hue.pdf",
+            'data_contrato' => now()
         ];
 
-        $cliente = $this->clienteRepository->createCliente($dados);
+        $result = $this->clienteRepository->storeNewCliente($dados);
 
-        return Inertia::render('Clientes/Index');
+        if($result){
+            return Inertia::render('Clientes/Index');
+        }
     }
+
+    public function edit($id){
+        $cliente = $this->clienteRepository->getCliente($id);
+
+        return Inertia::render('Clientes/Edit', compact('cliente'));
+    }
+
+    public function update($id, UpdateClienteRequest $request){
+        $data = $request->validated();
+
+        $result = $this->clienteRepository->updateCliente($id, $data);
+
+        if($result){
+            
+            return $this->index();
+        }
+    }
+
+    public function show($id){
+        $cliente = $this->clienteRepository->getCliente($id);
+
+        return Inertia::render('Clientes/Show', compact('cliente'));
+    }
+
+    public function destroy($id){}
 }

@@ -1,8 +1,8 @@
 <template>
-    <Head title="Cadastrar novo cliente" />
+    <Head title="Editar cliente" />
     <AuthenticatedLayout>
         <template #header>
-           Cadastrar Novo Cliente
+           Editar Cliente
         </template>
         <form @submit.prevent="submit">
             <label class="block text-sm">
@@ -12,7 +12,7 @@
                     placeholder="Jane Doe" v-model="form.nome">                
             </label>
     
-            <div class="mt-4 text-sm">
+            <!-- <div class="mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
                     Tipo de cliente
                 </span>
@@ -20,17 +20,17 @@
                     <label class="inline-flex items-center text-gray-600 dark:text-gray-400">
                         <input type="radio"
                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            name="accountType" value="pf" v-model="form.tipo">
+                            name="tipo" value="pf" v-model="form.tipo">
                         <span class="ml-2">Pessoa Física</span>
                     </label>
                     <label class="inline-flex items-center ml-6 text-gray-600 dark:text-gray-400">
                         <input type="radio"
                             class="text-purple-600 form-radio focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                            name="accountType" value="pj" v-model="form.tipo">
+                            name="tipo" value="pj" v-model="form.tipo">
                         <span class="ml-2">Pessoa Jurídica</span>
                     </label>
                 </div>
-            </div>
+            </div> -->
     
             <!-- <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
@@ -61,18 +61,22 @@ export default{
         Head,
         CustomButton
     },
+    props: {
+        cliente: Object
+    },
     data(){
         return {
             form: useForm({
-                nome: "",
-                tipo: "",
+                nome: this.cliente.nome,
+                _method: 'put',
             })
         }
     },
     methods: {
         submit(){
-            this.form.post(route('clientes.store'), {
+            this.form.post(route('clientes.update', this.cliente.id), this.form, {
                 preserveScroll: true,
+                forceFormData: true,
                 onSuccess: () => this.form.reset(),
                 onError: () => {}
             })
