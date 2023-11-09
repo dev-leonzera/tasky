@@ -48,4 +48,35 @@ class ClienteRepository {
             return false;
         }
     }
+
+    public function deleteCliente($id){
+        try {
+            $cliente = $this->clienteModel->find($id);
+            DB::transaction(function() use ($cliente) {
+              $cliente->delete();
+            });
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
+
+    public function toggleActiveCliente($id){
+        try {
+            $cliente = $this->clienteModel->find($id);
+            
+            DB::transaction(function() use ($cliente) {
+                if($cliente->ativo === "Inativo"){
+                    $cliente->ativo = 1;
+                } else {
+                    $cliente->ativo = 0;
+                }
+                $cliente->save();
+            });
+
+            return true;
+        } catch (\Throwable $th) {
+            return false;
+        }
+    }
 }

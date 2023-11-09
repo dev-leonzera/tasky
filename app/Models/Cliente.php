@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Utils\GenerateDataVencimento;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,6 +10,19 @@ class Cliente extends Model
 {
     protected $table = 'clientes';
     protected $guarded = ['id'];
+
+    protected static function boot(){
+        parent::boot();
+
+        static::created(function($cliente){
+            Mensalidade::create([
+                'cliente_id' => $cliente->id,
+                'data_vencimento' => GenerateDataVencimento::generate($cliente->dia_vencimento),
+                'pago' => false,
+                'data_pagamento' => null
+            ]);
+        });
+    }
 
     public function getAtivoAttribute()
     {

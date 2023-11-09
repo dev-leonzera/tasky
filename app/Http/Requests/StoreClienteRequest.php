@@ -24,6 +24,7 @@ class StoreClienteRequest extends FormRequest
         return [
             'nome' => 'required',
             'tipo' => 'required',
+            'dia_vencimento' => 'required',
         ];
     }
 }

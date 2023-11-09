@@ -32,12 +32,12 @@
                 </div>
             </div>
     
-            <!-- <label class="block mt-4 text-sm">
+            <label class="block mt-4 text-sm">
                 <span class="text-gray-700 dark:text-gray-400">
-                    Contrato
+                    Dia do Vencimento
                 </span>
-                <input type="file" name="documento" id="documento" class="ml-6" v-model="form.documento">
-            </label> -->
+                <input type="number" name="diaVencimento" id="diaVencimento" class="ml-6" v-model="form.dia_vencimento">
+            </label>
     
             <div class="flex mt-6 text-sm">                
                 <CustomButton :type="submit">Salvar</CustomButton>
@@ -66,6 +66,7 @@ export default{
             form: useForm({
                 nome: "",
                 tipo: "",
+                dia_vencimento: 0,
             })
         }
     },

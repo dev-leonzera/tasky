@@ -32,14 +32,14 @@ class ClienteController extends Controller
         $dados = [
             'nome' => $input['nome'],
             'tipo' => $input['tipo'],
-            'documento' => "Hue.pdf",
+            'dia_vencimento' => $input['dia_vencimento'],
             'data_contrato' => now()
         ];
 
         $result = $this->clienteRepository->storeNewCliente($dados);
 
         if($result){
-            return Inertia::render('Clientes/Index');
+            return $this->index();
         }
     }
 
@@ -66,5 +66,19 @@ class ClienteController extends Controller
         return Inertia::render('Clientes/Show', compact('cliente'));
     }
 
-    public function destroy($id){}
+    public function destroy($id){
+        $result = $this->clienteRepository->deleteCliente($id);
+
+        if($result){            
+            return $this->index();
+        }
+    }
+
+    public function toggleActiveCliente($id){
+        $result = $this->clienteRepository->toggleActiveCliente($id);
+
+        if($result){
+            $this->index();
+        }
+    }
 }

@@ -56,10 +56,9 @@
                   <div class="flex items-center space-x-4 text-sm">
                     <CustomReadButton :href="route('clientes.show', cliente.id)"></CustomReadButton>
                     <CustomEditButton :href="route('clientes.edit', cliente.id)"></CustomEditButton>
-                    <CustomDeactivateButton></CustomDeactivateButton>
-                    <CustomDeleteButton></CustomDeleteButton>
-                  </div>
-                  <!-- <CustomButton @click="deleteProject(cliente)">Delete</CustomButton> -->
+                    <CustomDeactivateButton @click="toggleClient(cliente)"></CustomDeactivateButton>
+                    <CustomDeleteButton @click="deleteClient(cliente)"></CustomDeleteButton>
+                  </div>                  
                 </td>
               </tr>
             </tbody>
@@ -74,20 +73,58 @@
   </AuthenticatedLayout>
 </template>
   
-<script setup>
+<script>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head, Link, useForm } from '@inertiajs/vue3';
 import CustomButton from '@/Components/Buttons/CustomButton.vue';
 import CustomReadButton from '@/Components/Buttons/CustomReadButton.vue';
 import CustomEditButton from '@/Components/Buttons/CustomEditButton.vue';
 import CustomDeactivateButton from '@/Components/Buttons/CustomDeactivateButton.vue';
 import CustomDeleteButton from '@/Components/Buttons/CustomDeleteButton.vue';
 
-const props = defineProps({
-  clientes: Object
-});
+ export default {
+  components: {
+    AuthenticatedLayout,
+    Head,
+    Link,
+    CustomDeleteButton,
+    CustomDeactivateButton,
+    CustomReadButton,
+    CustomEditButton,
+    CustomButton
+  },
+  props: {
+    clientes: Object
+  },
+  data(){
+    return{
+      form: useForm({}),
+      formD: useForm({
+        method: '_patch'
+      }),
+    };
+  },
+  methods: {
+    deleteClient(item){
+      this.form.delete(route('clientes.destroy', item.id),{
+        preserveScroll: true,
+        onSuccess: () => {},
+        onError: () => {},
+        onFinish: () => {},
+      });
+    },
 
+    toggleClient(item){
+      this.formD.patch(route('cliente.toggleActive', item.id), {
+        preserveScroll: true,
+        onSuccess: () => {},
+        onError: () => {},
+        onFinish: () => {},
+      });
+    }
+  },
+ };
 
 </script>
   
