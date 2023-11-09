@@ -63,6 +63,8 @@ class ClienteController extends Controller
     public function show($id){
         $cliente = $this->clienteRepository->getCliente($id);
 
+        // dd($cliente);
+
         return Inertia::render('Clientes/Show', compact('cliente'));
     }
 

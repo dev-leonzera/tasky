@@ -24,6 +24,10 @@ class Cliente extends Model
         });
     }
 
+    public function mensalidades(){
+        return $this->hasMany(Mensalidade::class);
+    }
+
     public function getAtivoAttribute()
     {
         return $this->attributes['ativo'] == 1 ? 'Ativo' : 'Inativo';

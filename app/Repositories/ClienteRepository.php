@@ -18,7 +18,7 @@ class ClienteRepository {
     }
 
     public function getCliente($id){
-        return $this->clienteModel->find($id);
+        return $this->clienteModel->with('mensalidades')->find($id);
     }
 
     public function getCountAllClientes(){
