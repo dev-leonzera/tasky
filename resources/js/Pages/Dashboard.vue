@@ -40,7 +40,7 @@
             Total de Projetos
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            10
+            {{ countProjetos }}
           </p>
         </div>
       </div>
@@ -199,6 +199,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps({
-  countClientes: Number
+  countClientes: Number,
+  countProjetos: Number,
 });
 </script>

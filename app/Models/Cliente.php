@@ -28,6 +28,10 @@ class Cliente extends Model
         return $this->hasMany(Mensalidade::class);
     }
 
+    public function projetos(){
+        return $this->hasMany(Projeto::class);
+    }
+
     public function getAtivoAttribute()
     {
         return $this->attributes['ativo'] == 1 ? 'Ativo' : 'Inativo';
