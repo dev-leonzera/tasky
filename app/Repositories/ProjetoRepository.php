@@ -22,14 +22,32 @@ class ProjetoRepository{
     }
 
     public function storeNewProjeto($dados){
-        try{
-            DB::transaction(function () use ($dados){
-                $this->projeto->create($dados);
-            });
-
+        DB::transaction(function () use ($dados){
+            $this->projeto->create($dados);
             return true;
-        } catch(\Throwable $th){
-            return false;
-        }
+        });
+        return false;
+    }
+
+    public function getProjeto($id){
+        return $this->projeto->with('clientes')->find($id);
+    }
+
+    public function updateProjeto($id, $dados){
+        $projeto = $this->projeto->find($id);
+        DB::transaction(function() use ($projeto, $dados){
+            $projeto->update($dados);
+            return true;
+        });
+    }
+
+    public function deleteProjeto($id){
+        $projeto = $this->projeto->find($id);
+
+        DB::transaction(function() use ($projeto){
+            $projeto->delete();
+            return true;
+        });
+        return false;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProjetoRequest;
+use App\Http\Requests\UpdateProjetoRequest;
 use App\Http\Resources\ProjetoResource;
 use App\Repositories\ClienteRepository;
 use App\Repositories\ProjetoRepository;
@@ -21,6 +22,12 @@ class ProjetoController extends Controller
     public function index(){
         $projetos = ProjetoResource::collection($this->projetoRepository->getAllProjetos());        
         return Inertia::render('Projetos/Index', compact('projetos'));
+    }
+
+    public function show($id){
+        $projeto = $this->projetoRepository->getProjeto($id);
+
+        return Inertia::render('Projetos/Show', compact('projeto'));
     }
 
     public function create(){
@@ -43,7 +50,29 @@ class ProjetoController extends Controller
 
         $result = $this->projetoRepository->storeNewProjeto($projeto);
 
-        if ($result){
+        if ($result === true){
+            return $this->index();
+        }
+    }
+
+    public function edit($id){
+        $projeto = $this->projetoRepository->getProjeto($id);
+
+        return Inertia::render('Projetos/Edit', compact('projeto'));
+    }
+
+    public function update($id, UpdateProjetoRequest $request){
+        $result = $this->projetoRepository->updateProjeto($id, $request->validated());
+
+        if ($result === true){
+            return $this->index();
+        }
+    }
+
+    public function destroy($id){
+        $result = $this->projetoRepository->deleteProjeto($id);
+
+        if ($result === true){
             return $this->index();
         }
     }

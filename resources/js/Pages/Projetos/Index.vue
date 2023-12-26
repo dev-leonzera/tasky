@@ -37,7 +37,7 @@
                 <td class="px-4 py-3">
                   <div class="flex items-center text-sm">
                     <div>
-                      <p>{{ projeto.titulo }}</p>                      
+                      <p class="font-semibold">{{ projeto.titulo }}</p>                      
                     </div>
                   </div>
                 </td>
@@ -62,8 +62,7 @@
                 <td class="px-4 py-3 text-left">
                   <div class="flex items-center space-x-4 text-sm">
                     <CustomReadButton :href="route('projetos.show', projeto.id)"></CustomReadButton>
-                    <CustomEditButton :href="route('projetos.edit', projeto.id)"></CustomEditButton>
-                    <CustomDeactivateButton @click="toggleClient(projeto)"></CustomDeactivateButton>
+                    <CustomEditButton :href="route('projetos.edit', projeto.id)"></CustomEditButton>                    
                     <CustomDeleteButton @click="deleteClient(projeto)"></CustomDeleteButton>
                   </div>                  
                 </td>
@@ -126,16 +125,7 @@ const loadPage = (pageUrl) => {
   },
   methods: {
     deleteClient(item){
-      this.form.delete(route('clientes.destroy', item.id),{
-        preserveScroll: true,
-        onSuccess: () => {},
-        onError: () => {},
-        onFinish: () => {},
-      });
-    },
-
-    toggleClient(item){
-      this.formD.patch(route('cliente.toggleActive', item.id), {
+      this.form.delete(route('projetos.destroy', item.id),{
         preserveScroll: true,
         onSuccess: () => {},
         onError: () => {},

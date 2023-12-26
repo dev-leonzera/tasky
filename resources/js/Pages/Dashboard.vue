@@ -58,7 +58,7 @@
             Tarefas
           </p>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            376
+            0
           </p>
         </div>
       </div>

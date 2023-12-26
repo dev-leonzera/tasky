@@ -2,14 +2,49 @@
   <Head title="Dados do projeto" />
   <AuthenticatedLayout>
     <template #header>
+      <div class="mb-4">
+        <CustomBackButton :href="route('projetos.index')"></CustomBackButton>
+      </div>
       Dados do Projeto
     </template>
     <label class="block text-sm">
       <span class="text-gray-700 dark:text-gray-400">Nome:</span>
-      {{ cliente.nome }}
+      {{ projeto.titulo }}
     </label>
-
     <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Nome do cliente:
+      </span>
+      {{ projeto.clientes.nome }}
+    </div>
+    <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Descrição do projeto:
+      </span>
+      <p>
+        {{ projeto.descricao }}
+      </p>
+    </div>
+    <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Orçamento:
+      </span>
+      {{ formatCurrency(projeto.orcamento) }}
+    </div>
+    <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Data de Início:
+      </span>
+      {{ new Date(projeto.data_inicio).toLocaleDateString() }}
+    </div>
+    <div class="mt-4 text-sm">
+      <span class="text-gray-700 dark:text-gray-400">
+        Data de Entrega:
+      </span>
+      {{ new Date(projeto.data_entrega).toLocaleDateString() }}
+    </div>
+
+    <!-- <div class="mt-4 text-sm">
       <span class="text-gray-700 dark:text-gray-400">
         Tipo de cliente:
       </span>
@@ -90,12 +125,12 @@
             </tbody>
           </table>
         </div>
-        <!-- <div
+        <div
           class="px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50 border-t sm:grid-cols-9">
         <pagination :links="users.links" />
-        </div> -->
+        </div>
       </div>
-    </div>
+    </div> -->
   </AuthenticatedLayout>
 </template>
 
@@ -103,6 +138,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Pagination from '@/Components/Pagination.vue';
 import CustomPayButton from '@/Components/Buttons/CustomPayButton.vue';
+import CustomBackButton from '@/Components/Buttons/CustomBackButton.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
 
@@ -111,10 +147,11 @@ export default {
   components: {
     Head,
     AuthenticatedLayout,
-    CustomPayButton
-  },
+    CustomPayButton,
+    CustomBackButton,
+},
   props: {
-    cliente: Object
+    projeto: Object
   },
   methods: {
     formatCurrency(value) {

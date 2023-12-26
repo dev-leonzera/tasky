@@ -13,7 +13,7 @@ class Projeto extends Model
     protected $guarded = ['id'];
 
     public function clientes(){
-        return $this->belongsTo(Cliente::class);
+        return $this->belongsTo(Cliente::class, 'cliente_id', 'id');
     }
 
     public function tarefas(){
