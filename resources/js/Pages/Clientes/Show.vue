@@ -2,42 +2,69 @@
   <Head title="Dados do cliente" />
   <AuthenticatedLayout>
     <template #header>
-      Dados do Cliente
-    </template>
-    <label class="block text-sm">
-      <span class="text-gray-700 dark:text-gray-400">Nome:</span>
-      {{ cliente.nome }}
-    </label>
 
-    <div class="mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
-        Tipo de cliente:
-      </span>
-      {{ cliente.tipo }}
-    </div>
-    <div class="mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
-        Status:
-      </span>
-      {{ cliente.ativo }}
-    </div>
-    <div class="mt-4 text-sm">
-      <span class="text-gray-700 dark:text-gray-400">
-        Cliente Desde:
-      </span>
-      {{ new Date(cliente.data_contrato).toLocaleDateString() }}
-    </div>
-    <div class="p-4 bg-white rounded-lg shadow-xs">
-      <div class="inline-flex overflow-hidden mb-4 bg-white rounded-lg shadow-md">
+    </template>
+    <div class="flex divide-x">
+      <div class="px-20 py-3 bg-white rounded-lg dark:bg-gray-800 flex flex-col justify-around">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Profile-720.png" alt="" srcset="" width="100">        
+        <div class="text-lg font-bold w-max text-center">
+          {{ cliente.nome }}
+        </div>
+      </div>
+      <div class="flex-col w-full divide-y">
+        <div class="px-5 py-3 bg-white rounded-lg dark:bg-gray-800">
+          <h1 class="text-2xl font-semibold">Dados do Cliente</h1>
+          <div class="mt-5 flex flex-wrap gap-9">        
+            <div class="text-base">
+              <span class="text-gray-700 dark:text-gray-400">
+                Email:
+              </span>
+              {{ cliente.email }}
+            </div>
+            <div class="text-base">
+              <span class="text-gray-700 dark:text-gray-400">
+                Telefone:
+              </span>
+              (84) 99999-9999
+            </div>
+            
+          </div>
+        </div>
+        <div class="px-5 py-3 bg-white rounded-lg dark:bg-gray-800">
+          <h1 class="text-2xl font-semibold">Dados do Contrato</h1>
+          <div class="flex mt-5 gap-9">
+            <div class="text-base">
+              <span class="text-gray-700 dark:text-gray-400">
+                Status:
+              </span>
+              {{ cliente.ativo }}
+            </div>
+            <div class="text-base">
+              <span class="text-gray-700 dark:text-gray-400">
+                Cliente desde:
+              </span>
+              {{ new Date(cliente.data_contrato).toLocaleDateString() }}
+            </div>
+            <div class="text-base">
+              <span class="text-gray-700 dark:text-gray-400">
+                Tipo de cliente:
+              </span>
+              {{ cliente.tipo }}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <h1>Mensalidades</h1>
-      <div class="w-full overflow-hidden rounded-lg shadow-xs">
+
+    </div>
+    <div class="p-1 rounded-lg shadow-xs mt-5">
+      <h1 class="text-2xl">Mensalidades</h1>
+      <div class="w-full overflow-hidden rounded-lg shadow-xs mt-5">
         <div class="w-full overflow-x-auto">
           <table class="w-full whitespace-no-wrap">
             <thead>
               <tr
-                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                class="text-xs font-semibold tracking-wide text-left bg-white  uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th class="px-4 py-3">Mensalidade</th>
                 <th class="px-4 py-3">Valor</th>
                 <th class="px-4 py-3">Data do Vencimento</th>

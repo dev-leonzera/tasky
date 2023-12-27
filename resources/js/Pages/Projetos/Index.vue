@@ -14,8 +14,8 @@
       </Link>
 
     </div>
-    <div class="p-4 bg-white rounded-lg shadow-xs">
-      <div class="inline-flex overflow-hidden mb-4 bg-white rounded-lg shadow-md">
+    <div class="p-1 rounded-lg shadow-xs">
+      <div class="inline-flex overflow-hidden mb-4 rounded-lg shadow-md">
       </div>
 
       <div class="w-full overflow-hidden rounded-lg shadow-xs">
@@ -23,7 +23,7 @@
           <table class="w-full whitespace-no-wrap">
             <thead>
               <tr
-                class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                class="bg-white text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                 <th class="px-4 py-3">Título</th>
                 <th class="px-4 py-3">Nome do Cliente</th>
                 <th class="px-4 py-3">Orçamento</th>
