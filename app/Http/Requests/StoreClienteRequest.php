@@ -23,8 +23,10 @@ class StoreClienteRequest extends FormRequest
     {
         return [
             'nome' => 'required',
+            'email' => 'required|email',
             'tipo' => 'required',
             'dia_vencimento' => 'required',
+            'mensalista' => 'required',
         ];
     }
 }

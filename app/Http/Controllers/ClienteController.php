@@ -28,17 +28,18 @@ class ClienteController extends Controller
     public function store(StoreClienteRequest $request){
         $input = $request->validated();
 
-        
         $dados = [
             'nome' => $input['nome'],
+            'email' => $input['email'],
             'tipo' => $input['tipo'],
             'dia_vencimento' => $input['dia_vencimento'],
+            'mensalista' => $input['mensalista'] === "s" ? true : false,
             'data_contrato' => now()
         ];
 
         $result = $this->clienteRepository->storeNewCliente($dados);
 
-        if($result){
+        if($result === true){
             return $this->index();
         }
     }

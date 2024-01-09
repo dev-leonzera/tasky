@@ -15,12 +15,14 @@ class Cliente extends Model
         parent::boot();
 
         static::created(function($cliente){
-            Mensalidade::create([
-                'cliente_id' => $cliente->id,
-                'data_vencimento' => GenerateDataVencimento::generate($cliente->dia_vencimento),
-                'pago' => false,
-                'data_pagamento' => null
-            ]);
+            if($cliente->mensalista === true){
+                Mensalidade::create([
+                    'cliente_id' => $cliente->id,
+                    'data_vencimento' => GenerateDataVencimento::generate($cliente->dia_vencimento),
+                    'pago' => false,
+                    'data_pagamento' => null
+                ]);
+            }
         });
     }
 

@@ -14,9 +14,12 @@ return new class extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('email');
             $table->date('data_contrato');
             $table->string('tipo');            
             $table->boolean('ativo')->default(true);
+            $table->integer('dia_vencimento')->nullable();
+            $table->boolean('mensalista')->default(false);
             $table->timestamps();
         });
     }

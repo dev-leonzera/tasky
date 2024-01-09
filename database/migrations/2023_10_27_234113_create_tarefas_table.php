@@ -17,7 +17,9 @@ return new class extends Migration
             $table->string('titulo');
             $table->text('descricao');
             $table->date('inicio');
-            $table->date('entrega');
+            $table->boolean('feita')->default(false);
+            $table->date('prazo_entrega'); // Data em que a tarefa precisa ser entregue
+            $table->date('data_entrega');  // Data que a tarefa foi entregue
             $table->timestamps();
         });
     }
