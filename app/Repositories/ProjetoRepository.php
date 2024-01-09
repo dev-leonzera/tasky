@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Projeto;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ProjetoRepository{
 
@@ -49,5 +50,17 @@ class ProjetoRepository{
             return true;
         });
         return false;
+    }
+
+    public function getProjetosAtrasando(){
+        $dataAtual = Carbon::now();
+        $dataVencimentoLimite = $dataAtual->copy()->addDays(5);
+
+        $projetos = $this->projeto->with('clientes')->whereDate('data_entrega', '>=', $dataAtual)
+        ->whereDate('data_entrega', '<=', $dataVencimentoLimite)
+        ->where('ativo', '=', 1)
+        ->get();
+
+        return $projetos;
     }
 }

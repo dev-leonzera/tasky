@@ -20,7 +20,17 @@ class DashboardController extends Controller
 
     public function index(){
         $countClientes = $this->clienteRepository->getCountAllClientes();
-        $countProjetos = $this->projetoRepository->getCountProjetos();
-        return Inertia::render('Dashboard', compact('countClientes', 'countProjetos'));
+        $countProjetos = $this->projetoRepository->getCountProjetos();       
+
+        $projetos = $this->projetoRepository->getProjetosAtrasando();
+        $mensalidades = $this->clienteRepository->getMensalidadesVencendo();
+        
+        return Inertia::render('Dashboard', 
+            compact(
+                'countClientes', 
+                'countProjetos',
+                'mensalidades',
+                'projetos'
+            ));
     }
 }

@@ -65,7 +65,8 @@
               <table class="w-full whitespace-no-wrap">
                 <thead>
                   <tr
-                    class="text-xs font-semibold tracking-wide text-left bg-white  uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    class="text-xs font-semibold tracking-wide text-left bg-white 
+                    uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
                     <th class="px-4 py-3">Mensalidade</th>
                     <th class="px-4 py-3">Valor</th>
                     <th class="px-4 py-3">Data do Vencimento</th>
@@ -111,7 +112,7 @@
                     </td>
                     <td class="px-4 py-3 text-left">
                       <div class="flex items-center space-x-4 text-sm">
-                        <CustomPayButton></CustomPayButton>
+                        <CustomPayButton @click="pagarMensalidade(mensalidade)"></CustomPayButton>
                       </div>
                     </td>
                   </tr>
@@ -145,6 +146,13 @@ export default {
   props: {
     cliente: Object
   },
+  data(){
+    return {
+      form: useForm({
+        method: '_patch'
+      }),
+    }
+  },
   methods: {
     formatCurrency(value) {
       if (typeof value === 'number') {
@@ -155,6 +163,15 @@ export default {
       }
       return value; // Caso o valor não seja um número, retorne sem formatação.
     },
+    pagarMensalidade(item){
+      
+      this.form.patch(route('cliente.pagar', item.id), {
+        preserveScroll: true,
+        onSuccess: () => {},
+        onError: () => {},
+        onFinish: () => {},
+      });
+    }
   }
 }
 

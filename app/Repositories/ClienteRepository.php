@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Cliente;
+use App\Models\Mensalidade;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ClienteRepository {
@@ -78,5 +80,17 @@ class ClienteRepository {
         } catch (\Throwable $th) {
             return false;
         }
+    }
+
+    public function getMensalidadesVencendo(){
+        $dataAtual = Carbon::now();
+        $dataVencimentoLimite = $dataAtual->copy()->addDays(5);
+
+        $mensalidades = Mensalidade::with('cliente')->whereDate('data_vencimento', '>=', $dataAtual)
+        ->whereDate('data_vencimento', '<=', $dataVencimentoLimite)
+        ->where('pago', '=', 0)
+        ->get();
+
+        return $mensalidades;
     }
 }

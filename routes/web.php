@@ -3,6 +3,7 @@
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PagarMensalidadeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjetoController;
 use Illuminate\Foundation\Application;
@@ -20,6 +21,7 @@ Route::middleware('auth')->group(function () {
     //Rotas do módulo de clientes
     Route::resource('clientes', ClienteController::class);
     Route::patch('cliente/deactivate/{cliente}', [ClienteController::class, 'toggleActiveCliente'])->name('cliente.toggleActive');
+    Route::patch('cliente/pagar/{mensalidade}', PagarMensalidadeController::class)->name('cliente.pagar');
     //Rotas do módulo de projetos
     Route::resource('projetos', ProjetoController::class);
 });

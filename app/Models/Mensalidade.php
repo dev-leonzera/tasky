@@ -10,6 +10,10 @@ class Mensalidade extends Model
     protected $table = 'mensalidades';
     protected $guarded = ['id'];
 
+    public function cliente(){
+        return $this->belongsTo(Cliente::class);
+    }
+
     public function getPagoAttribute(){
         return $this->attributes['pago'] == 1 ? 'Sim' : 'Não';
     }

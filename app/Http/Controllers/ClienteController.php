@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
+use App\Models\Mensalidade;
 use App\Repositories\ClienteRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -83,5 +84,15 @@ class ClienteController extends Controller
         if($result){
             $this->index();
         }
+    }
+
+    public function pagarMensalidade($id){
+        $mensalidade = Mensalidade::find($id);
+
+        $mensalidade->pago = 1;
+        $mensalidade->data_pagamento = now();
+        $mensalidade->save();
+
+        return Inertia::render('Clientes/Index', compact('clientes'));
     }
 }
