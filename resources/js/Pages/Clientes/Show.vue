@@ -67,9 +67,8 @@
                   <tr
                     class="text-xs font-semibold tracking-wide text-left bg-white 
                     uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                    <th class="px-4 py-3">Mensalidade</th>
-                    <th class="px-4 py-3">Valor</th>
                     <th class="px-4 py-3">Data do Vencimento</th>
+                    <th class="px-4 py-3">Valor</th>
                     <th class="px-4 py-3">Pago?</th>
                     <th class="px-4 py-3">Data de Pagamento</th>
                     <th class="px-4 py-3">Ações</th>
@@ -81,10 +80,11 @@
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
                         <div>
-                          <p class="font-semibold">{{ mensalidade.id }}</p>
+                          <p class="font-semibold">{{ new Date(mensalidade.data_vencimento).toLocaleDateString() }}</p>
                         </div>
                       </div>
                     </td>
+                    
                     <td class="px-4 py-3">
                       <div class="flex items-center text-sm">
                         <div>
@@ -92,13 +92,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="px-4 py-3">
-                      <div class="flex items-center text-sm">
-                        <div>
-                          <p class="font-semibold">{{ new Date(mensalidade.data_vencimento).toLocaleDateString() }}</p>
-                        </div>
-                      </div>
-                    </td>
+                    
                     <td class="px-4 py-3 text-xs">
                       <span class="px-2 py-1 font-semibold leading-tight rounded-full"
                         :class="{ 'text-red-700 bg-red-100': mensalidade.pago === 'Não', 'text-green-700 bg-green-100': mensalidade.pago === 'Sim' }">

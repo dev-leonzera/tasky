@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Utils\GenerateDataVencimento;
+use App\Utils\GenerateMensalidades;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,12 +17,7 @@ class Cliente extends Model
 
         static::created(function($cliente){
             if($cliente->mensalista === true){
-                Mensalidade::create([
-                    'cliente_id' => $cliente->id,
-                    'data_vencimento' => GenerateDataVencimento::generate($cliente->dia_vencimento),
-                    'pago' => false,
-                    'data_pagamento' => null
-                ]);
+                GenerateMensalidades::generate($cliente->id, $cliente->dia_vencimento);
             }
         });
     }

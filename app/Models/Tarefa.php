@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Tarefa extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function projeto(){
+        return $this->belongsTo(Projeto::class);
+    }
 }

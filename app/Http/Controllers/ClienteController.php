@@ -6,7 +6,7 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Http\Requests\UpdateClienteRequest;
 use App\Models\Mensalidade;
 use App\Repositories\ClienteRepository;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class ClienteController extends Controller
@@ -30,18 +30,22 @@ class ClienteController extends Controller
         $input = $request->validated();
 
         $dados = [
+            'user_id' => Auth::user()->id,
             'nome' => $input['nome'],
             'email' => $input['email'],
             'tipo' => $input['tipo'],
             'dia_vencimento' => $input['dia_vencimento'],
             'mensalista' => $input['mensalista'] === "s" ? true : false,
-            'data_contrato' => now()
+            'data_contrato' => now()->format('Y-m-d'),
         ];
-
+        
         $result = $this->clienteRepository->storeNewCliente($dados);
-
+        
+        
         if($result === true){
             return $this->index();
+        } else {
+            return $result;
         }
     }
 
@@ -56,8 +60,7 @@ class ClienteController extends Controller
 
         $result = $this->clienteRepository->updateCliente($id, $data);
 
-        if($result){
-            
+        if($result){            
             return $this->index();
         }
     }

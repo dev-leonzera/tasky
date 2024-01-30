@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Cliente;
 use App\Models\Mensalidade;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ClienteRepository {
@@ -16,7 +17,7 @@ class ClienteRepository {
     }
 
     public function listAllClientes(){
-        return $this->clienteModel->all();
+        return $this->clienteModel->where('user_id', Auth::user()->id)->get();
     }
 
     public function getCliente($id){
@@ -24,7 +25,7 @@ class ClienteRepository {
     }
 
     public function getCountAllClientes(){
-        return $this->clienteModel->all()->count();
+        return $this->clienteModel->where('user_id', Auth::user()->id)->count();
     }
 
     public function storeNewCliente($dados){
@@ -34,8 +35,8 @@ class ClienteRepository {
             });
             return true;
             
-        } catch (\Throwable $th) {
-            return false;
+        } catch (\Exception $e) {
+            return $e->getMessage();
         }
     }
 
